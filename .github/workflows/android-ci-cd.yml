@@ -7,7 +7,7 @@ on:
     branches: [main, develop]
 
 jobs:
-  # Lint and Test Job
+  # ✅ Lint and Test Job
   test:
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +29,7 @@ jobs:
       - name: Run tests
         run: npm test
 
-  # Android Build Job
+  # ✅ Android Build (Debug)
   android-build:
     needs: test
     runs-on: ubuntu-latest
@@ -79,7 +79,7 @@ jobs:
           name: app-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
 
-  # Build and Deploy Release (only on main branch)
+  # ✅ Android Release (only on main branch)
   android-release:
     needs: test
     runs-on: ubuntu-latest
@@ -152,7 +152,7 @@ jobs:
           name: app-release-aab
           path: android/app/build/outputs/bundle/release/app-release.aab
 
-      # # Optional: Deploy to Play Store
+      # ✅ Optional: Deploy to Play Store
       # - name: Deploy to Play Store
       #   if: success()
       #   uses: r0adkll/upload-google-play@v1
