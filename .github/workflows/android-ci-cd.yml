@@ -91,7 +91,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: '20'
           cache: 'npm'
 
       - name: Setup Java
@@ -99,6 +99,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
@@ -140,25 +143,25 @@ jobs:
           cd android
           ./gradlew bundleRelease
 
-      # - name: Upload Release APK
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: app-release-apk
-      #     path: android/app/build/outputs/apk/release/app-release.apk
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
 
-      # - name: Upload Release AAB
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: app-release-aab
-      #     path: android/app/build/outputs/bundle/release/app-release.aab
+      - name: Upload Release AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-aab
+          path: android/app/build/outputs/bundle/release/app-release.aab
 
       # Deploy to Play Store
-      # - name: Deploy to Play Store
-      #   if: success()
-      #   uses: r0adkll/upload-google-play@v1
-      #   with:
-      #     serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
-      #     packageName: com.yourapp.package
-      #     releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
-      #     track: internal
-      #     status: completed
+      - name: Deploy to Play Store
+        if: success()
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: com.reactnativecicd
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: internal
+          status: completed
