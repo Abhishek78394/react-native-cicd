@@ -1,4 +1,4 @@
-package com.reactnativecicd
+package com.hk.reactnativecicd
 
 import android.app.Application
 import com.facebook.react.PackageList

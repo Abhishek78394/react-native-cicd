@@ -4,7 +4,7 @@
 
 ### 1. **Play Store Deployment Step** - ✅ ENABLED
 - Uncommented the Play Store deployment step
-- Fixed package name from `com.yourapp.package` → `com.reactnativecicd`
+- Fixed package name from `com.yourapp.package` → `com.hk.reactnativecicd`
 - Deployment now happens automatically after AAB build
 
 ### 2. **Android SDK Setup** - ✅ ADDED
@@ -50,7 +50,7 @@
      - ✅ **View app information** (REQUIRED - always check this)
      - ✅ **Release apps to testing tracks** (REQUIRED for internal/alpha/beta)
      - ✅ **Release apps to production** (Only if deploying to production)
-   - **CRITICAL:** Make sure your app is selected in the app list (package: `com.reactnativecicd`)
+   - **CRITICAL:** Make sure your app is selected in the app list (package: `com.hk.reactnativecicd`)
    - Click **Invite User** or **Save**
    - **Wait 5-10 minutes** for permissions to take effect
 
@@ -144,7 +144,7 @@ Upload Artifacts to GitHub
 ```yaml
 track: internal          # Deploys to Internal testing track
 status: completed        # App is ready immediately (no draft)
-packageName: com.reactnativecicd
+packageName: com.hk.reactnativecicd
 ```
 
 ### **Available Tracks:**
@@ -186,7 +186,7 @@ packageName: com.reactnativecicd
 
 **Error: "Package name mismatch"**
 - ❌ Package name in workflow doesn't match Play Console
-- ✅ Solution: Verify `com.reactnativecicd` matches your app
+- ✅ Solution: Verify `com.hk.reactnativecicd` matches your app
 
 **Error: "The caller does not have permission"** or **"Insufficient permissions"**
 - ❌ Service account not granted access in Play Console OR wrong permissions
@@ -214,7 +214,7 @@ packageName: com.reactnativecicd
        - ✅ **View app information** (mandatory)
        - ✅ **Release apps to testing tracks** (for internal/alpha/beta)
        - ✅ **Release apps to production** (if deploying to production)
-     - **Select the app:** Make sure your app (`com.reactnativecicd`) is selected
+     - **Select the app:** Make sure your app (`com.hk.reactnativecicd`) is selected
      - Click **Invite User** or **Save**
   
   5. **Wait 5-10 minutes** for permissions to propagate
@@ -299,7 +299,7 @@ Before your first deployment, ensure:
 - [ ] `GOOGLE_PLAY_SERVICE_ACCOUNT_JSON` secret added to GitHub
 - [ ] Service Account has proper permissions in Play Console
 - [ ] Internal testing track exists in Play Console
-- [ ] App created in Play Console with package name `com.reactnativecicd`
+- [ ] App created in Play Console with package name `com.hk.reactnativecicd`
 - [ ] Keystore secrets already configured (`ANDROID_KEYSTORE_BASE64`, etc.)
 
 ---

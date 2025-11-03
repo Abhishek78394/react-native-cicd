@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "ReactNativeCicd.app"
-               BlueprintName = "ReactNativeCicd"
-               ReferencedContainer = "container:ReactNativeCicd.xcodeproj">
+               BuildableName = "hk.reactnativecicd.app"
+               BlueprintName = "hk.reactnativecicd"
+               ReferencedContainer = "container:hk.reactnativecicd.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "ReactNativeCicdTests.xctest"
-               BlueprintName = "ReactNativeCicdTests"
-               ReferencedContainer = "container:ReactNativeCicd.xcodeproj">
+               BuildableName = "hk.reactnativecicdTests.xctest"
+               BlueprintName = "hk.reactnativecicdTests"
+               ReferencedContainer = "container:hk.reactnativecicd.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "ReactNativeCicd.app"
-            BlueprintName = "ReactNativeCicd"
-            ReferencedContainer = "container:ReactNativeCicd.xcodeproj">
+            BuildableName = "hk.reactnativecicd.app"
+            BlueprintName = "hk.reactnativecicd"
+            ReferencedContainer = "container:hk.reactnativecicd.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "ReactNativeCicd.app"
-            BlueprintName = "ReactNativeCicd"
-            ReferencedContainer = "container:ReactNativeCicd.xcodeproj">
+            BuildableName = "hk.reactnativecicd.app"
+            BlueprintName = "hk.reactnativecicd"
+            ReferencedContainer = "container:hk.reactnativecicd.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
