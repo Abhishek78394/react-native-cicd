@@ -41,14 +41,20 @@
    - Grant role: **Editor** (or **Owner** for full access)
    - Click **Continue** → **Done**
 
-4. **Grant Play Console Access:**
-   - Back in Play Console, find your new service account
-   - Click **Grant Access**
-   - Select permissions:
-     - ✅ **Release apps to production** (or Internal testing)
-     - ✅ **Release apps to testing tracks**
-     - ✅ **View app information**
-   - Click **Invite User**
+4. **Grant Play Console Access (CRITICAL STEP!):**
+   - **IMPORTANT:** Go back to Google Play Console (don't skip this!)
+   - In Play Console, go to: **Settings** → **API access**
+   - You should see your service account listed
+   - Click **Grant Access** (or the pencil/edit icon if it exists)
+   - **Select permissions:**
+     - ✅ **View app information** (REQUIRED - always check this)
+     - ✅ **Release apps to testing tracks** (REQUIRED for internal/alpha/beta)
+     - ✅ **Release apps to production** (Only if deploying to production)
+   - **CRITICAL:** Make sure your app is selected in the app list (package: `com.reactnativecicd`)
+   - Click **Invite User** or **Save**
+   - **Wait 5-10 minutes** for permissions to take effect
+
+**⚠️ WARNING:** If you skip this step, you'll get "The caller does not have permission" error!
 
 5. **Download JSON Key:**
    - In Google Cloud Console → IAM & Admin → Service Accounts
@@ -56,6 +62,33 @@
    - Go to **Keys** tab → **Add Key** → **Create new key**
    - Choose **JSON** format
    - **Download** the JSON file (keep it secure!)
+
+### **Step 1.5: Enable Android Publisher API** (REQUIRED - Fixes API Error)
+
+**⚠️ IMPORTANT:** This step fixes the error: *"Google Play Android Developer API has not been used in project..."*
+
+1. **Open the JSON file** you downloaded (from Step 1)
+2. **Find your project ID** in the JSON:
+   ```json
+   "project_id": "861116867919"
+   ```
+   (Your project ID is: `861116867919`)
+
+3. **Enable the API:**
+   - Visit: https://console.developers.google.com/apis/api/androidpublisher.googleapis.com/overview?project=861116867919
+   - OR manually:
+     - Go to [Google Cloud Console](https://console.cloud.google.com/)
+     - Select your project (ID: `861116867919`)
+     - Navigate to: **APIs & Services** → **Library**
+     - Search for: `Google Play Android Developer API`
+     - Click **Enable**
+
+4. **Wait 2-3 minutes** after enabling for the API to propagate
+
+**Alternative Quick Link:**
+- Click this direct link: https://console.developers.google.com/apis/api/androidpublisher.googleapis.com/overview?project=861116867919
+- Click the **Enable** button
+- Wait a few minutes, then retry your deployment
 
 ### **Step 2: Add GitHub Secret** (REQUIRED)
 
@@ -155,13 +188,56 @@ packageName: com.reactnativecicd
 - ❌ Package name in workflow doesn't match Play Console
 - ✅ Solution: Verify `com.reactnativecicd` matches your app
 
-**Error: "Insufficient permissions"**
-- ❌ Service account lacks permissions
-- ✅ Solution: Grant proper permissions in Play Console
+**Error: "The caller does not have permission"** or **"Insufficient permissions"**
+- ❌ Service account not granted access in Play Console OR wrong permissions
+- ✅ **Solution - Follow these steps CAREFULLY:**
+
+  1. **Go to Google Play Console:**
+     - Visit: https://play.google.com/console
+     - Sign in and select your app
+  
+  2. **Navigate to API Access:**
+     - Go to: **Settings** → **API access**
+     - Look for your service account email (it looks like: `github-actions-play-store@861116867919.iam.gserviceaccount.com`)
+  
+  3. **Check if Service Account Exists:**
+     - If you DON'T see your service account listed:
+       - Click **Create new service account**
+       - This will open Google Cloud Console
+       - Create the service account (if you haven't already)
+       - Go back to Play Console → Refresh the page
+  
+  4. **Grant Access (MOST IMPORTANT STEP):**
+     - Find your service account in the list
+     - Click **Grant Access** (or the pencil/edit icon)
+     - **CRITICAL:** Select these permissions:
+       - ✅ **View app information** (mandatory)
+       - ✅ **Release apps to testing tracks** (for internal/alpha/beta)
+       - ✅ **Release apps to production** (if deploying to production)
+     - **Select the app:** Make sure your app (`com.reactnativecicd`) is selected
+     - Click **Invite User** or **Save**
+  
+  5. **Wait 5-10 minutes** for permissions to propagate
+  
+  6. **Verify Permissions:**
+     - In Play Console → API access
+     - Your service account should show: "Has access"
+     - Click on it to see granted permissions
+
+**Common Mistakes:**
+- ❌ Only created service account but never clicked "Grant Access" in Play Console
+- ❌ Forgot to select the app when granting permissions
+- ❌ Only granted "View app information" without "Release apps" permission
+- ✅ **You MUST click "Grant Access" in Play Console - this is a separate step!**
 
 **Error: "Track not found"**
 - ❌ Internal track doesn't exist
 - ✅ Solution: Create Internal testing track in Play Console
+
+**Error: "Google Play Android Developer API has not been used..."**
+- ❌ Android Publisher API not enabled in Google Cloud
+- ✅ Solution: Enable the API using the link in the error or follow Step 1.5 above
+- ✅ Wait 2-3 minutes after enabling before retrying
 
 ---
 
@@ -219,6 +295,7 @@ Before your first deployment, ensure:
 
 - [ ] Google Play Service Account created
 - [ ] Service Account JSON downloaded
+- [ ] **Android Publisher API enabled** in Google Cloud Console (Step 1.5)
 - [ ] `GOOGLE_PLAY_SERVICE_ACCOUNT_JSON` secret added to GitHub
 - [ ] Service Account has proper permissions in Play Console
 - [ ] Internal testing track exists in Play Console
