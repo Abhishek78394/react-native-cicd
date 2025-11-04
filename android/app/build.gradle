@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.hk.reactnativecicd"
+    namespace "com.hk.reactnativeautomation"
     defaultConfig {
-        applicationId "com.hk.reactnativecicd"
+        applicationId "com.hk.reactnativeautomation"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2
